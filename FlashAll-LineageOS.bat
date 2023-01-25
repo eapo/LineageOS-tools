@@ -35,7 +35,7 @@ echo : ! Return to the main menu.
 echo : ! "Reboot system now",
 echo : ---
 PATH=%PATH%;"%SYSTEMROOT%\System32"
-echo : # Rooting/Magisk info here: https://forum.xda-developers.com/t/4443457/
+echo : # Rooting/Magisk info here: https://github.com/topjohnwu/Magisk
 echo : ? "Magisk-*.apk" is downloaded?
 echo : ! Boot into system and enable ADB then,
 echo : * continue to install Magisk
