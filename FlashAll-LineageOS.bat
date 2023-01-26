@@ -1,10 +1,10 @@
 @echo OFF
-cp lineage-*-recovery-*.img recovery.img 
+if not exist recovery.img cp lineage-*-recovery-*.img recovery.img 
 adb reboot bootloader
 fastboot flash boot recovery.img
 fastboot reboot bootloader
 ping -n 5 127.0.0.1 >nul
-echo : # Flasing downloaded "LineageOS", "MindTheGapps" and "Magisk" packages
+echo : # Flasing downloaded "./lineage-*", "./MindTheGapps*" and "./Magisk" packages
 echo : ? "lineage-*-signed.zip" is downloaded?
 echo : ! Press [Volume] the to select "Recovery Mode".
 echo : ! Tap "Factory Reset", then "Format data / factory reset" and continue with the formatting process.
@@ -14,7 +14,7 @@ echo : ! On the device, select "Apply Update", then "Apply from ADB" for Sideloa
 ping -n 15 127.0.0.1 >nul
 echo : * Continue to Sideload LineageOS package
 pause
-cp lineage-*-signed.zip LineageOS.zip
+if not exist LineageOS.zip cp lineage-*-signed.zip LineageOS.zip
 ping -n 5 127.0.0.1 >nul
 adb sideload LineageOS.zip
 ping -n 5 127.0.0.1 >nul
@@ -27,7 +27,7 @@ echo : ! On the device, select "Apply Update", then "Apply from ADB" for Sideloa
 echo : * Continue to Sideload the MindTheGapps*.zip
 echo : * or Ctrl+C can Cancel to Sideload the MindTheGapps*.zip
 pause
-cp MindTheGapps*.zip MindTheGapps.zip
+if not exist MindTheGapps.zip cp MindTheGapps*.zip MindTheGapps.zip
 ping -n 5 127.0.0.1 >nul
 adb sideload MindTheGapps.zip
 ping -n 5 127.0.0.1 >nul
@@ -41,7 +41,7 @@ echo : ! Boot into system and enable ADB then,
 echo : * continue to install Magisk
 echo : * or Ctrl+C can Cancel installing Magisk
 pause
-cp Magisk-*.apk magisk.apk
+if not exist magisk.apk cp Magisk-*.apk magisk.apk
 adb install -r magisk.apk
 ping -n 5 127.0.0.1 >nul
 adb push recovery.img /sdcard
@@ -57,8 +57,8 @@ ping -n 5 127.0.0.1 >nul
 echo : * After "All done!" appear on screen,
 echo : * continue to pull the patched Recovery
 pause
-adb pull /sdcard/Download/ .
-cp Download/magisk_patched-*.img magisk.img
+if not exist magisk.img adb pull /sdcard/Download/ .
+if not exist magisk.img cp Download/magisk_patched-*.img magisk.img
 adb reboot bootloader
 fastboot flash boot magisk.img
 fastboot reboot
